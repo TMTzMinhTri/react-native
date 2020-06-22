@@ -7,7 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import { fetchDetails } from "../../store/actions/details";
 import styles from "./styles";
 import Input from "../../components/UI/Input";
@@ -18,7 +18,7 @@ export const HomeScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   const loadDetails = async () => {
   //     setIsLoading(true);
@@ -35,6 +35,9 @@ export const HomeScreen = (props) => {
   //     name,
   //   });
   // };
+  const test = () => {
+    dispatch({ type: "TEST" })
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -48,12 +51,7 @@ export const HomeScreen = (props) => {
         <TouchableOpacity
           style={styles.searchButton}
           activeOpacity={0.6}
-          onPress={() => {
-            if (search)
-              props.navigation.navigate("searchBar", {
-                search,
-              });
-          }}
+          onPress={test}
         >
           <Text style={styles.btnText}> Search </Text>
         </TouchableOpacity>
