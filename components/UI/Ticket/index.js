@@ -6,6 +6,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
 const Ticket = (props) => {
   return (
     <View style={{ ...styles.items, ...props.style }}>
@@ -73,21 +74,17 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: wp("6%"),
-    fontFamily: "roboto-bold",
     color: Colors.dark,
   },
   owner: {
     fontSize: wp("3%"),
-    fontFamily: "roboto-light",
   },
   time: {
     fontSize: wp("5%"),
-    fontFamily: "roboto-light",
   },
   date: {
     fontSize: wp("3%"),
     textAlign: "right",
-    fontFamily: "roboto",
   },
   location: {
     flexDirection: "row",
@@ -125,12 +122,10 @@ const styles = StyleSheet.create({
   },
   midway: {
     color: Colors.ltGray,
-    fontFamily: "roboto-light",
     flexWrap: "wrap",
   },
   midwayStation: {
     color: Colors.ltGray,
-    fontFamily: "roboto",
   },
 });
 

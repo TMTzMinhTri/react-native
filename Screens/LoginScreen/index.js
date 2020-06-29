@@ -7,17 +7,23 @@ import {
   Alert,
   SafeAreaView,
   ScrollView,
+  AsyncStorage,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./styles";
 import Card from "../../components/UI/Card";
 import Input from "../../components/UI/Input";
 import Btn from "../../components/UI/Btn";
+import { LOGIN } from "./saga/reducer";
 
-export const LoginScreen = (props) => {
+export const LoginScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [screen, setScreen] = useState(true);
   const [formState, setFormState] = React.useState({
     username: "", password: "", name: "", phone_number: ""
   })
-  const [screen, setScreen] = useState(true);
+  const { isLoged } = useSelector(state => state.LoginReducer)
   const errorAlert = (error) => {
     Alert.alert("Error", error, [{ text: "OK" }], { cancelable: false });
   };
@@ -26,8 +32,8 @@ export const LoginScreen = (props) => {
     setFormState({ ...formState, [key]: text })
   };
 
-  const authHandler = async (type) => {
-    console.log("calling", type);
+  const authHandler = (type) => {
+    dispatch({ type: LOGIN, formState })
   };
 
   return (
@@ -84,7 +90,7 @@ export const LoginScreen = (props) => {
                   <Btn
                     style={styles.btn}
                     onPress={() => {
-                      authHandler(LOGIN);
+                      authHandler("LOGIN");
                     }}
                   >
                     LOGIN
@@ -93,7 +99,7 @@ export const LoginScreen = (props) => {
                     <Btn
                       style={styles.btn}
                       onPress={() => {
-                        authHandler(REGISTER);
+                        authHandler("REGISTER");
                       }}
                     >
                       REGISTER

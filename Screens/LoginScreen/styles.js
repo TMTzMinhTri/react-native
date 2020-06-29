@@ -22,7 +22,6 @@ export default StyleSheet.create({
   },
   title: {
     fontSize: 34,
-    fontFamily: "bebas",
   },
   inputContainer: {
     backgroundColor: '#f9f9f9',

@@ -1,14 +1,17 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { Provider } from "react-redux";
+import { Provider, useSelector, useDispatch } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { AsyncStorage } from 'react-native';
 
 import rootSaga from "./Store/RootSaga";
 import combinedReducers from "./Store/rootReducers";
 import { AuthStackScreen } from "./Navigator/AuthStack";
-import { HomeStackScreen } from "./Navigator/HomeStack";
+import { TabNavigatorScreen } from "./Navigator/HomeStack";
+import * as  Screens from "./Screens";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -23,15 +26,43 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
+const Drawer = createDrawerNavigator();
+
+const DrawerScreen = () => (
+  <Drawer.Navigator drawerPosition="right" drawerType="front" >
+    <Drawer.Screen
+      name="home"
+      component={TabNavigatorScreen}
+      options={{ title: "HOME" }}
+    />
+    <Drawer.Screen name="userinfo" component={Screens.UserInfo} options={{ title: "Thông tin" }} />
+  </Drawer.Navigator>
+);
+
 const App = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        {/* <AuthStackScreen /> */}
-        <HomeStackScreen />
-      </NavigationContainer>
+      <Test />
     </Provider>
   );
 };
+
+export const Test = () => {
+  const { isLoged } = useSelector(state => state.LoginReducer)
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    AsyncStorage.getItem("userInfo").then((rsp) => {
+      console.log(rsp)
+      if (rsp)
+        dispatch({ type: "LOGIN_SUCCESS", isLoged: true })
+      
+    })
+  }, [])
+  return <NavigationContainer>
+    {isLoged ? <DrawerScreen />
+      : <AuthStackScreen />}
+  </NavigationContainer>
+}
 
 export default App;

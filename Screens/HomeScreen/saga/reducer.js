@@ -4,8 +4,8 @@ export const API_CALL_FAILURE = 'API_CALL_FAILURE';
 
 const initialState = {
     fetching: false,
-    dog: null,
-    error: null
+    error: null,
+    listLichChay: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 fetching: false,
-                dog: action.dog,
+                listLichChay: action.data
             }
         case API_CALL_FAILURE:
             return {

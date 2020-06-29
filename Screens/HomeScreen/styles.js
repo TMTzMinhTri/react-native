@@ -5,6 +5,15 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
+  },
   screen: {
     width: Dimensions.get("window").width,
     flexDirection: "row",
@@ -50,7 +59,6 @@ export default StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   btnText: {
-    fontFamily: "roboto",
     fontSize: 16,
     color: Colors.light,
   },
@@ -59,21 +67,17 @@ export default StyleSheet.create({
   },
   name: {
     fontSize: wp("6%"),
-    fontFamily: "roboto-bold",
     color: Colors.dark,
   },
   owner: {
     fontSize: wp("3%"),
-    fontFamily: "roboto-light",
   },
   time: {
     fontSize: wp("5%"),
-    fontFamily: "roboto-light",
   },
   date: {
     fontSize: wp("3%"),
     textAlign: "right",
-    fontFamily: "roboto",
   },
   location: {
     flexDirection: "row",
@@ -84,14 +88,12 @@ export default StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     textAlign: "center",
-    fontFamily: "bebas",
     fontSize: wp("5%"),
   },
   amountWrapper: {
     alignItems: "center",
   },
   amount: {
-    fontFamily: "bebas",
     fontSize: wp("5%"),
     color: Colors.primary,
   },
@@ -111,10 +113,8 @@ export default StyleSheet.create({
   },
   midway: {
     color: Colors.ltGray,
-    fontFamily: "roboto-light",
   },
   midwayStation: {
     color: Colors.ltGray,
-    fontFamily: "roboto",
   },
 });
